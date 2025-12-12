@@ -1,0 +1,7 @@
+1:"$Sreact.fragment"
+2:I[79334,["/_next/static/chunks/7a489de821e2062d.js","/_next/static/chunks/0415a6dde7993d89.js"],"ViewportBoundary"]
+4:I[79334,["/_next/static/chunks/7a489de821e2062d.js","/_next/static/chunks/0415a6dde7993d89.js"],"MetadataBoundary"]
+5:"$Sreact.suspense"
+0:{"buildId":"me5FPYM4vUYRjHInzoHp0","rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
+3:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+6:[["$","title","0",{"children":"Axis & Orbit | Premium Digital Delivery"}],["$","meta","1",{"name":"description","content":"Flexible like freelancers, reliable like agencies. Premium digital delivery from Kerala to the world."}],["$","meta","2",{"name":"generator","content":"v0.app"}]]
