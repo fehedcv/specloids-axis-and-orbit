@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X, ArrowRight } from "lucide-react"
 import { gsap } from "gsap"
@@ -25,10 +26,9 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Initial Entrance Animation (Fixed visibility bug)
+  // Initial Entrance Animation
   useEffect(() => {
     const ctx = gsap.context(() => {
-      
       // 1. Animate Logo In
       gsap.to(logoRef.current, {
         opacity: 1,
@@ -47,7 +47,6 @@ export function Navigation() {
         ease: "power3.out",
         delay: 0.4,
       })
-      
     }, navRef)
 
     return () => ctx.revert()
@@ -56,7 +55,7 @@ export function Navigation() {
   // Mobile Menu Animation
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden' // Lock scroll
+      document.body.style.overflow = 'hidden'
       gsap.to(mobileMenuRef.current, {
         opacity: 1,
         pointerEvents: "all",
@@ -68,7 +67,7 @@ export function Navigation() {
         { y: 0, opacity: 1, stagger: 0.1, duration: 0.5, ease: "back.out(1.2)", delay: 0.2 }
       )
     } else {
-      document.body.style.overflow = 'unset' // Unlock scroll
+      document.body.style.overflow = 'unset'
       gsap.to(mobileMenuRef.current, {
         opacity: 0,
         pointerEvents: "none",
@@ -87,6 +86,7 @@ export function Navigation() {
 
   // Dynamic Text Color Class
   const textColorClass = isScrolled || isMobileMenuOpen ? "text-slate-900" : "text-white"
+  const currentLogo = isScrolled || isMobileMenuOpen ? "/axislogomain.png" : "/axislogolight.png"
 
   return (
     <>
@@ -101,18 +101,27 @@ export function Navigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             
-            {/* Logo */}
+            {/* Logo Section - UPDATED with Text */}
             <Link 
               ref={logoRef} 
               href="/" 
-              // Initial state: opacity-0 and translated up
-              className="flex items-center gap-2 group z-50 relative opacity-0 -translate-y-4"
+              className="flex items-center gap-3 relative z-50 opacity-0 -translate-y-4 group"
             >
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${isScrolled || isMobileMenuOpen ? "bg-blue-600 shadow-blue-200" : "bg-white/10 backdrop-blur-md"}`}>
-                <div className={`w-3 h-3 rounded-full ${isScrolled || isMobileMenuOpen ? "bg-white" : "bg-white"}`} />
+              {/* Image Container */}
+              <div className="relative w-10 h-10 transition-all duration-300">
+                <Image 
+                  src={currentLogo}
+                  alt="Specloid's Axis & Orbit Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                  sizes="40px"
+                />
               </div>
-              <span className={`font-sans font-bold text-xl tracking-tight transition-colors duration-300 ${textColorClass}`}>
-                Axis & Orbit
+              
+              {/* Text Label */}
+              <span className={`font-bold text-lg tracking-tight whitespace-nowrap transition-colors duration-300 ${textColorClass}`}>
+                Specloid&apos;s Axis & Orbit
               </span>
             </Link>
 
@@ -122,7 +131,6 @@ export function Navigation() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  // Initial state: opacity-0 and translated up
                   className={`relative text-sm font-medium transition-colors hover:opacity-70 group opacity-0 -translate-y-4 ${textColorClass}`}
                 >
                   {item.label}
@@ -130,7 +138,6 @@ export function Navigation() {
                 </Link>
               ))}
               
-              {/* BUTTON IS HERE - Initial state opacity-0 to match animation logic */}
               <div className="opacity-0 -translate-y-4">
                   <Button 
                     className={`font-semibold rounded-full px-6 transition-all duration-300 shadow-lg ${

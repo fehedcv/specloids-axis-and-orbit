@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image" // 1. Import Image
 import { MapPin, Mail, Linkedin, Twitter, Github, ArrowRight, Send } from "lucide-react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -91,10 +92,19 @@ export function Footer() {
           {/* Brand Column (Span 4) */}
           <div className="lg:col-span-4 opacity-0 translate-y-8">
             <Link href="/" className="flex items-center gap-3 mb-6 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-lg group-hover:shadow-blue-500/20 transition-all duration-300">
-                <div className="w-3 h-3 rounded-full bg-white" />
+              {/* Logo Image */}
+              <div className="relative w-10 h-10">
+                <Image 
+                  src="/axislogolight.png" 
+                  alt="Specloid's Axis & Orbit Logo" 
+                  fill 
+                  className="object-contain"
+                />
               </div>
-              <span className="font-sans font-bold text-2xl tracking-tight">Axis & Orbit</span>
+              {/* Updated Text */}
+              <span className="font-sans font-bold text-2xl tracking-tight">
+                Specloid&apos;s Axis & Orbit
+              </span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-8 max-w-sm">
               Premium digital delivery combining freelancer flexibility with agency reliability. 
