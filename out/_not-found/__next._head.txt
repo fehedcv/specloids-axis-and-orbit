@@ -1,7 +1,7 @@
 1:"$Sreact.fragment"
-2:I[97367,["/_next/static/chunks/e5aa755a0bf21330.js","/_next/static/chunks/7c1adecb94a489ba.js","/_next/static/chunks/247eb132b7f7b574.js"],"ViewportBoundary"]
-4:I[97367,["/_next/static/chunks/e5aa755a0bf21330.js","/_next/static/chunks/7c1adecb94a489ba.js","/_next/static/chunks/247eb132b7f7b574.js"],"MetadataBoundary"]
+2:I[21990,["/_next/static/chunks/c625ee5c1245fd7b.js","/_next/static/chunks/7ac361a56c944b6e.js","/_next/static/chunks/64fe2bb439b88118.js"],"ViewportBoundary"]
+4:I[21990,["/_next/static/chunks/c625ee5c1245fd7b.js","/_next/static/chunks/7ac361a56c944b6e.js","/_next/static/chunks/64fe2bb439b88118.js"],"MetadataBoundary"]
 5:"$Sreact.suspense"
-0:{"buildId":"A1JPvz9QsGqwmLU9kwp_m","rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"lkX1Wus5V0vbq9zUoocu9","rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
 3:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 6:[["$","title","0",{"children":"Axis & Orbit | Premium Digital Delivery"}],["$","meta","1",{"name":"description","content":"Flexible like freelancers, reliable like agencies. Premium digital delivery from Kerala to the world."}],["$","meta","2",{"name":"generator","content":"v0.app"}]]
