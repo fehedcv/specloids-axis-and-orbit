@@ -17,6 +17,7 @@ import {
 import Link from "next/link"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useLanguage } from "@/components/language-provider"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -83,6 +84,7 @@ export function ServicesSection() {
   const headingRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
   const bgShapeRef = useRef<HTMLDivElement>(null)
+  const { t } = useLanguage()
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -155,13 +157,13 @@ export function ServicesSection() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-axis-blue/5 text-axis-blue text-xs font-bold uppercase tracking-wider mb-6">
             <Zap className="w-3 h-3" />
-            Our Expertise
+            {t("services.tag")}
           </div>
           <h2 className="font-sans text-4xl sm:text-5xl font-bold text-orbital-navy tracking-tight text-balance">
-            Complete Digital Solutions
+            {t("services.title")}
           </h2>
           <p className="mt-6 text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            From concept to deployment, we provide end-to-end engineering tailored to scale your business.
+            {t("services.description")}
           </p>
         </div>
 
@@ -179,9 +181,9 @@ export function ServicesSection() {
               `}
             >
               {/* Featured Badge */}
-              {service.featured && (
+                {service.featured && (
                 <div className="absolute top-0 right-0 px-4 py-1.5 bg-gradient-to-r from-ion-gold to-yellow-400 text-white text-xs font-bold rounded-bl-2xl">
-                  POPULAR
+                  {t("services.popular")}
                 </div>
               )}
 
@@ -202,23 +204,26 @@ export function ServicesSection() {
               {/* Content */}
               <div className="relative z-10">
                 <h3 className="font-sans font-bold text-xl text-orbital-navy mb-3 group-hover:text-axis-blue transition-colors duration-300">
-                  {service.title}
+                  {t(`services.items.${index}.title`)}
                 </h3>
-                
+
                 <p className="text-slate-500 text-sm leading-relaxed mb-6">
-                  {service.description}
+                  {t(`services.items.${index}.description`)}
                 </p>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {service.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="px-2.5 py-1 text-[11px] font-semibold bg-slate-100 text-slate-500 rounded-md transition-colors duration-300 group-hover:bg-white group-hover:shadow-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  {(() => {
+                    const tags = t(`services.items.${index}.tags`) || service.tags
+                    return (tags || []).map((tag: string, tagIndex: number) => (
+                      <span
+                        key={tagIndex}
+                        className="px-2.5 py-1 text-[11px] font-semibold bg-slate-100 text-slate-500 rounded-md transition-colors duration-300 group-hover:bg-white group-hover:shadow-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))
+                  })()}
                 </div>
 
                 {/* Action Link */}
@@ -229,7 +234,7 @@ export function ServicesSection() {
                     asChild
                   >
                     <Link href="#contact">
-                      Learn more
+                      {t("services.learnMore")}
                       <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </Link>
                   </Button>

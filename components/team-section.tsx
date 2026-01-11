@@ -6,37 +6,23 @@ import Link from "next/link"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MapPin, ArrowUpRight, Sparkles } from "lucide-react"
+import { useLanguage } from "./language-provider"
 
 gsap.registerPlugin(ScrollTrigger)
 
-const team = [
-  {
-    name: "Danish Roshan",
-    role: "Founder & CEO",
-    location: "Daejeon, South Korea",
-    image: "/danish(1).jpeg",
-    bio: "A bachelor’s student in Physics based in Daejeon, exploring the fundamental laws of nature through theory and experimentation.",
-  },
-  {
-    name: "Fahad Mohammed Kabeer",
-    role: "Project Manager",
-    location: "Kerala, India",
-    image: "/fahad(2).jpeg",
-    bio: "The best developer in the whole world who loves to manage projects and teams efficiently.",
-  },
-  {
-    name: "Moon Sohn",
-    role: "Strategic Advisor",
-    location: "Daejeon, South Korea",
-    image: "https://raw.githubusercontent.com/fehedcv/axis-and-orbit/refs/heads/main/img/WhatsApp%20Image%202025-07-25%20at%2011.11.52%20AM.jpeg",
-    bio: "A student of Business Administration with a passion for strategic planning and organizational growth.",
-  },
+// Static image paths for team members
+const teamImages = [
+  "/danish(1).jpeg",
+  "/fahad(2).jpeg",
+  "https://raw.githubusercontent.com/fehedcv/axis-and-orbit/refs/heads/main/img/WhatsApp%20Image%202025-07-25%20at%2011.11.52%20AM.jpeg",
 ]
 
 export function TeamSection() {
+  const { t } = useLanguage()
   const sectionRef = useRef<HTMLElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const imageRefs = useRef<(HTMLDivElement | null)[]>([])
+  const team = (t("team.items") as any[]) || []
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -67,8 +53,8 @@ export function TeamSection() {
         
         {/* Mobile Heading (Visible only on mobile) */}
         <div className="lg:hidden mb-12">
-            <h2 className="font-sans text-4xl font-bold mb-4">The Collective</h2>
-            <p className="text-cool-fog/80">World-class talent from India.</p>
+            <h2 className="font-sans text-4xl font-bold mb-4">{t("team.heading")}</h2>
+            <p className="text-cool-fog/80">{t("team.subheading")}</p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
@@ -87,7 +73,7 @@ export function TeamSection() {
                   }`}
                 >
                   <img
-                    src={member.image}
+                    src={teamImages[index] || ""}
                     alt={member.name}
                     className="w-full h-full object-cover"
                   />
@@ -113,10 +99,10 @@ export function TeamSection() {
             {/* Desktop Heading */}
             <div className="hidden lg:block mb-16">
               <h2 className="font-sans text-5xl font-bold tracking-tight mb-6">
-                The Collective
+                {t("team.heading")}
               </h2>
               <p className="text-xl text-cool-fog/60 font-light max-w-md">
-                 We are a curated network of senior engineers and designers, not a random bench.
+                 {t("team.description")}
               </p>
             </div>
 
@@ -138,7 +124,7 @@ export function TeamSection() {
                       
                       {/* Mobile-only Avatar (Since the big image is hidden on mobile) */}
                       <div className="lg:hidden w-12 h-12 rounded-full overflow-hidden ring-2 ring-white/10">
-                        <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                        <img src={teamImages[index] || ""} alt={member.name} className="w-full h-full object-cover" />
                       </div>
 
                       <div className="flex flex-col items-start">
@@ -177,7 +163,7 @@ export function TeamSection() {
                 className="rounded-full border-white/20 bg-transparent text-white hover:bg-white hover:text-orbital-navy h-12 px-8"
                 asChild
                >
-                 <Link href="#contact">Join the Network</Link>
+                 <Link href="#contact">{t("team.joinNetworkButton")}</Link>
                </Button>
             </div>
 

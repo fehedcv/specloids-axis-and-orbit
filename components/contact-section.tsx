@@ -7,28 +7,11 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CheckCircle2, ArrowRight, Mail, MessageSquare } from "lucide-react" // Removed Send, added MessageSquare
+import { useLanguage } from "@/components/language-provider"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 gsap.registerPlugin(ScrollTrigger)
-
-const steps = [
-  {
-    number: "01",
-    title: "Discovery Call",
-    description: "We discuss your goals, budget, and timeline in a free 30-min consultation.",
-  },
-  {
-    number: "02",
-    title: "Strategic Proposal",
-    description: "Receive a detailed roadmap, architecture plan, and fixed-price quote.",
-  },
-  {
-    number: "03",
-    title: "Kickoff & Build",
-    description: "Meet your dedicated squad and start the first sprint within 48 hours.",
-  },
-]
 
 export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -47,6 +30,8 @@ export function ContactSection() {
   const headingRef = useRef<HTMLDivElement>(null)
   const leftRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLDivElement>(null)
+  const { t } = useLanguage()
+  const steps = (t("contact.journeySteps") as any[]) || []
 
   // 2. Handle Input Changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -147,18 +132,16 @@ ${formData.details}`
         {/* Header */}
         <div ref={headingRef} className="text-center max-w-3xl mx-auto mb-16 lg:mb-24 opacity-0 translate-y-10">
           <h2 className="font-sans text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
-            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Launch?</span>
+            {t("contact.heading")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"></span>
           </h2>
-          <p className="mt-6 text-xl text-slate-600 font-light max-w-2xl mx-auto">
-            Tell us about your vision. We'll help you navigate the technical landscape and build a solution that scales.
-          </p>
+          <p className="mt-6 text-xl text-slate-600 font-light max-w-2xl mx-auto">{t("contact.paragraph")}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           
           {/* Left: Process Steps */}
           <div ref={leftRef} className="opacity-0 -translate-x-12">
-            <h3 className="font-sans text-2xl font-bold text-slate-900 mb-8">The Journey</h3>
+            <h3 className="font-sans text-2xl font-bold text-slate-900 mb-8">{t("contact.journeyTitle")}</h3>
             
             <div className="relative space-y-12">
               <div className="absolute left-6 top-2 bottom-2 w-px bg-slate-200" />
@@ -202,30 +185,30 @@ ${formData.details}`
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Name</label>
+                      <label className="text-xs font-bold uppercase tracking-wider text-slate-400">{t("contact.form.name")}</label>
                     <Input
                       name="name"
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      placeholder="John Doe"
+                        placeholder={t("contact.form.name")}
                       className="bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white h-12 rounded-xl transition-all"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Company</label>
+                      <label className="text-xs font-bold uppercase tracking-wider text-slate-400">{t("contact.form.company")}</label>
                     <Input 
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      placeholder="Acme Inc." 
+                        placeholder={t("contact.form.company")} 
                       className="bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white h-12 rounded-xl transition-all"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Email</label>
+                  <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-slate-400">{t("contact.form.email")}</label>
                   <div className="relative">
                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <Input
@@ -234,7 +217,7 @@ ${formData.details}`
                       type="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      placeholder="john@example.com"
+                      placeholder={t("contact.form.email")}
                       className="pl-10 bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white h-12 rounded-xl transition-all"
                     />
                   </div>
@@ -242,7 +225,7 @@ ${formData.details}`
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Service</label>
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">{t("contact.form.service")}</label>
                     <Select onValueChange={(val) => handleSelectChange("service", val)}>
                       <SelectTrigger className="bg-slate-50 border-slate-200 text-slate-900 h-12 rounded-xl focus:ring-offset-0 focus:ring-blue-500">
                         <SelectValue placeholder="Select type" />
@@ -256,7 +239,7 @@ ${formData.details}`
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Budget</label>
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">{t("contact.form.budget")}</label>
                     <Select onValueChange={(val) => handleSelectChange("budget", val)}>
                       <SelectTrigger className="bg-slate-50 border-slate-200 text-slate-900 h-12 rounded-xl focus:ring-offset-0 focus:ring-blue-500">
                         <SelectValue placeholder="Range" />
@@ -272,13 +255,13 @@ ${formData.details}`
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Project Details</label>
+                  <label className="text-xs font-bold uppercase tracking-wider text-slate-400">{t("contact.form.details")}</label>
                   <Textarea
                     name="details"
                     required
                     value={formData.details}
                     onChange={handleInputChange}
-                    placeholder="Tell us a bit about your goals..."
+                    placeholder={t("contact.form.details")}
                     rows={4}
                     className="bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white resize-none rounded-xl transition-all"
                   />
@@ -291,12 +274,12 @@ ${formData.details}`
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
-                    "Redirecting to WhatsApp..."
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      Send via WhatsApp <MessageSquare className="w-5 h-5" />
-                    </span>
-                  )}
+                      t("contact.redirecting")
+                    ) : (
+                      <span className="flex items-center gap-2">
+                        {t("contact.sendWhatsApp")} <MessageSquare className="w-5 h-5" />
+                      </span>
+                    )}
                 </Button>
                 
                 <p className="text-center text-xs text-slate-400">

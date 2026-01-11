@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { gsap } from "gsap"
 import { ChevronRight } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
 
 export function HeroSection() {
   const containerRef = useRef<HTMLElement>(null)
@@ -14,6 +15,8 @@ export function HeroSection() {
   const buttonsRef = useRef<HTMLDivElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null) // Kept ref, though removed from JSX in your snippet.
+
+  const { t } = useLanguage()
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -99,10 +102,10 @@ export function HeroSection() {
           ref={headingRef}
           className="font-sans text-5xl sm:text-7xl md:text-8xl font-bold tracking-tighter text-white leading-[1.05] mb-8 opacity-0 translate-y-8"
         >
-          Flexible Like Freelancers. <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-ion-gold via-yellow-100 to-ion-gold">
-            Reliable Like Agencies.
-          </span>
+            {t("hero.headingLine1")} <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-ion-gold via-yellow-100 to-ion-gold">
+              {t("hero.headingLine2")}
+            </span>
         </h1>
 
         {/* Subtext */}
@@ -110,8 +113,7 @@ export function HeroSection() {
           ref={paragraphRef}
           className="text-lg sm:text-2xl text-cool-fog/80 max-w-3xl mx-auto leading-relaxed font-light mb-12 tracking-tight opacity-0 translate-y-8"
         >
-          Premium digital delivery from Kerala to the world. <br className="hidden sm:block"/>
-          We combine the agility of elite developers with the structure of established firms.
+          {t("hero.paragraph")}
         </p>
 
         {/* Action Buttons */}
@@ -126,7 +128,7 @@ export function HeroSection() {
               asChild
             >
               <Link href="#contact">
-                Start Project
+                {t("hero.startButton")}
               </Link>
             </Button>
           </div>
@@ -139,7 +141,7 @@ export function HeroSection() {
               asChild
             >
               <Link href="#services">
-                View Our Work
+                {t("hero.viewWork")}
                 <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>

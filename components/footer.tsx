@@ -6,31 +6,27 @@ import { MapPin, Mail, Linkedin, Twitter, Github, Send } from "lucide-react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "@/components/language-provider"
 import { Input } from "@/components/ui/input"
 
 gsap.registerPlugin(ScrollTrigger)
 
 const quickLinks = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Case Studies", href: "#case-studies" },
-  { label: "Team", href: "#team" },
+  { key: "nav.about", href: "#about" },
+  { key: "nav.services", href: "#services" },
+  { key: "nav.work", href: "#case-studies" },
+  { key: "nav.team", href: "#team" },
   { label: "Careers", href: "#careers" },
 ]
 
-const services = [
-  "Conversational AI",
-  "App Development",
-  "Web Design",
-  "DevOps",
-  "QA & Testing",
-  "MVP Acceleration",
-]
+// footer services are provided via translations
 
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const watermarkRef = useRef<HTMLDivElement>(null)
+  const { t } = useLanguage()
+  const footerServices: string[] = (t("footer.services") as string[]) || []
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -99,10 +95,7 @@ export function Footer() {
               </span>
             </Link>
 
-            <p className="text-slate-400 text-sm leading-relaxed mb-8 max-w-sm">
-              Premium digital delivery combining freelancer flexibility with agency reliability.
-              Building exceptional digital experiences from Kerala to the world.
-            </p>
+            <p className="text-slate-400 text-sm leading-relaxed mb-8 max-w-sm">{t("footer.brandParagraph")}</p>
 
             <div className="flex gap-4">
               {[Linkedin, Twitter, Github].map((Icon, i) => (
@@ -119,16 +112,16 @@ export function Footer() {
 
           {/* Company */}
           <div className="lg:col-span-2 lg:col-start-6 opacity-0 translate-y-8">
-            <h4 className="font-bold text-lg mb-6">Company</h4>
+            <h4 className="font-bold text-lg mb-6">{t("footer.company")}</h4>
             <ul className="space-y-4">
               {quickLinks.map((link) => (
-                <li key={link.label}>
+                <li key={link.key ?? link.label}>
                   <Link
                     href={link.href}
                     className="text-slate-400 text-sm hover:text-white transition-colors flex items-center gap-2 group"
                   >
                     <span className="w-0 group-hover:w-2 h-px bg-blue-500 transition-all duration-300" />
-                    {link.label}
+                    {link.key ? t(link.key!) : link.label}
                   </Link>
                 </li>
               ))}
@@ -137,9 +130,9 @@ export function Footer() {
 
           {/* Services */}
           <div className="lg:col-span-2 opacity-0 translate-y-8">
-            <h4 className="font-bold text-lg mb-6">Expertise</h4>
+            <h4 className="font-bold text-lg mb-6">{t("footer.expertise")}</h4>
             <ul className="space-y-4">
-              {services.map((service) => (
+              {footerServices.map((service) => (
                 <li key={service}>
                   <Link
                     href="#services"
@@ -154,15 +147,13 @@ export function Footer() {
 
           {/* Newsletter */}
           <div className="lg:col-span-3 opacity-0 translate-y-8">
-            <h4 className="font-bold text-lg mb-6">Stay Updated</h4>
-            <p className="text-slate-400 text-sm mb-4">
-              Get the latest tech trends and insights delivered to your inbox.
-            </p>
+            <h4 className="font-bold text-lg mb-6">{t("footer.stayUpdated")}</h4>
+            <p className="text-slate-400 text-sm mb-4">{t("footer.brandParagraph")}</p>
 
             <form className="relative">
               <Input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t("footer.newsletterPlaceholder")}
                 className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 h-12 pr-12 rounded-lg focus:bg-white/10 transition-colors"
               />
               <Button

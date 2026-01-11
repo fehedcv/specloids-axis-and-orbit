@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter, Libre_Baskerville } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
+import LanguageProvider from "@/components/language-provider"
 import "./globals.css"
 
 const inter = Inter({
@@ -30,7 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${libreBaskerville.variable} font-sans antialiased`}>
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <LanguageProvider>
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>

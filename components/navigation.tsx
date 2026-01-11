@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { useLanguage, LanguageToggleButton } from "@/components/language-provider"
 import { Menu, X, ArrowRight } from "lucide-react"
 import { gsap } from "gsap"
 
@@ -80,11 +81,13 @@ export function Navigation() {
     }
   }, [isMobileMenuOpen])
 
+  const { t } = useLanguage()
+
   const navItems = [
-    { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Work", href: "#case-studies" },
-    { label: "Team", href: "#team" },
+    { label: t("nav.about"), href: "#about" },
+    { label: t("nav.services"), href: "#services" },
+    { label: t("nav.work"), href: "#case-studies" },
+    { label: t("nav.team"), href: "#team" },
   ]
 
   const textColorClass =
@@ -145,7 +148,7 @@ export function Navigation() {
                 </Link>
               ))}
 
-              <div className="opacity-0 -translate-y-4">
+              <div className="opacity-0 -translate-y-4 flex items-center gap-4">
                 <Button
                   className={`font-semibold rounded-full px-6 transition-all duration-300 shadow-lg ${
                     isScrolled
@@ -154,8 +157,10 @@ export function Navigation() {
                   }`}
                   asChild
                 >
-                  <Link href="#contact">Start Project</Link>
+                  <Link href="#contact">{t("nav.startProject")}</Link>
                 </Button>
+
+                <LanguageToggleButton className={`rounded-full px-3 py-2 text-sm ${isScrolled ? 'bg-white/5 text-slate-900' : 'bg-white text-slate-900'}`} />
               </div>
             </div>
 
@@ -192,7 +197,7 @@ export function Navigation() {
             </Link>
           ))}
 
-          <div className="pt-8">
+            <div className="pt-8">
             <Button
               size="lg"
               className="w-full bg-blue-600 text-white hover:bg-blue-700 h-14 text-lg rounded-xl"
@@ -202,16 +207,17 @@ export function Navigation() {
                 href="#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Start a Project <ArrowRight className="ml-2 w-5 h-5" />
+                {t("nav.startProject")} <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
           </div>
         </div>
 
         <div className="absolute bottom-10 left-0 w-full text-center">
-          <p className="text-sm text-slate-400 font-medium">
-            Kochi • Dubai • San Francisco
-          </p>
+          <div className="flex items-center justify-center gap-4">
+            <p className="text-sm text-slate-400 font-medium">Kochi • Dubai • San Francisco</p>
+            <LanguageToggleButton className="text-sm text-slate-600" />
+          </div>
         </div>
       </div>
     </>

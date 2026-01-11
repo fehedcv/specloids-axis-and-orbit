@@ -4,46 +4,18 @@ import { useEffect, useRef } from "react"
 import { Star, Quote, MapPin } from "lucide-react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useLanguage } from "./language-provider"
 
 gsap.registerPlugin(ScrollTrigger)
 
-const testimonials = [
-  {
-    rating: 5,
-    quote:
-      "Axis & Orbit delivered our e-commerce platform ahead of schedule with exceptional quality. Their communication was outstanding throughout the project.",
-    name: "Takeshi Yamamoto",
-    role: "CEO",
-    company: "ZenMarket",
-    location: "Tokyo, Japan",
-    initials: "TY",
-    color: "bg-blue-100 text-blue-600"
-  },
-  {
-    rating: 5,
-    quote:
-      "The team's expertise in AI and their structured approach to delivery made all the difference. Our app users love the intelligent features they built.",
-    name: "Sarah Chen",
-    role: "Product Director",
-    company: "FinTrack",
-    location: "Singapore",
-    initials: "SC",
-    color: "bg-purple-100 text-purple-600"
-  },
-  {
-    rating: 5,
-    quote:
-      "Working with Axis & Orbit felt like having an extended team. They truly understood our educational mission and delivered a platform that students love.",
-    name: "Kim Ji-won",
-    role: "Founder",
-    company: "EduConnect",
-    location: "Seoul, Korea",
-    initials: "KJ",
-    color: "bg-emerald-100 text-emerald-600"
-  },
+const avatarColors = [
+  "bg-blue-100 text-blue-600",
+  "bg-purple-100 text-purple-600",
+  "bg-emerald-100 text-emerald-600",
 ]
 
 export function TestimonialsSection() {
+  const { t } = useLanguage()
   const sectionRef = useRef<HTMLElement>(null)
   const headingRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
@@ -112,16 +84,16 @@ export function TestimonialsSection() {
         >
           
           <h2 className="font-sans text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight text-balance">
-            Trusted by Global Leaders
+            {t("testimonials.heading")}
           </h2>
           <p className="mt-6 text-lg text-slate-600 leading-relaxed font-light">
-            Don't just take our word for it. Here's what business leaders across Asia and the world say about working with us.
+            {t("testimonials.subheading")}
           </p>
         </div>
 
         {/* Testimonials Grid */}
         <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+          {(t("testimonials.items") as any[]).map((testimonial, index) => (
             <div 
               key={index} 
               // Initial State: Opacity 0, Translated Down
@@ -145,7 +117,7 @@ export function TestimonialsSection() {
               {/* Author Info */}
               <div className="relative flex items-center gap-4 pt-6 border-t border-slate-100">
                 {/* Avatar Placeholder */}
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm ${testimonial.color}`}>
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm ${avatarColors[index]}`}>
                   {testimonial.initials}
                 </div>
                 

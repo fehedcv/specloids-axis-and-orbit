@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react"
 import { Globe, Calendar, Rocket, Users, CreditCard, Shield } from "lucide-react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useLanguage } from "@/components/language-provider"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -47,6 +48,7 @@ export function WhyChooseSection() {
   const blob1Ref = useRef<HTMLDivElement>(null)
   const blob2Ref = useRef<HTMLDivElement>(null)
   const contentContainerRef = useRef<HTMLDivElement>(null)
+  const { t } = useLanguage()
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -151,10 +153,10 @@ export function WhyChooseSection() {
           className="text-center max-w-3xl mx-auto mb-20 opacity-0 translate-y-12"
         >
           <h2 className="font-sans text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight text-balance leading-tight">
-            Why Choose Axis & Orbit?
+            {t("why.title")}
           </h2>
           <p className="mt-6 text-lg text-slate-600 leading-relaxed font-light">
-            We bridge the gap between freelancer flexibility and agency reliability, delivering exceptional results for businesses worldwide.
+            {t("why.paragraph")}
           </p>
         </div>
 
@@ -174,11 +176,11 @@ export function WhyChooseSection() {
               </div>
               
               <h3 className="font-sans font-bold text-xl text-slate-900 mb-3 tracking-tight relative z-10">
-                {feature.title}
+                {t(`why.items.${index}.title`)}
               </h3>
-              
+
               <p className="text-slate-500 leading-relaxed text-base relative z-10">
-                {feature.description}
+                {t(`why.items.${index}.description`)}
               </p>
             </div>
           ))}

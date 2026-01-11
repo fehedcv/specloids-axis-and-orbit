@@ -6,46 +6,20 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useLanguage } from "./language-provider"
 
 gsap.registerPlugin(ScrollTrigger)
 
-const caseStudies = [
-  {
-    title: "ZenMarket Japan",
-    category: "E-commerce Platform",
-    description: "Complete e-commerce solution with real-time inventory management and global payment processing.",
-    image: "/japanese-ecommerce-website-dashboard-with-products.jpg",
-    tech: ["React", "Node.js", "MongoDB"],
-    metrics: [
-      { label: "Load Speed", value: "2.3x" },
-      { label: "Conversion", value: "+45%" },
-    ],
-  },
-  {
-    title: "FinTrack Singapore",
-    category: "Personal Finance App",
-    description: "AI-powered financial insights helping users make smarter money decisions via predictive models.",
-    image: "/modern-finance-app-mobile-interface-with-charts.jpg",
-    tech: ["React Native", "Python", "TensorFlow"],
-    metrics: [
-      { label: "Rating", value: "4.8/5" },
-      { label: "Retention", value: "85%" },
-    ],
-  },
-  {
-    title: "EduConnect Korea",
-    category: "EdTech Platform",
-    description: "Interactive learning platform connecting students with world-class educators via WebRTC.",
-    image: "/online-learning-platform-with-video-courses.jpg",
-    tech: ["Next.js", "WebRTC", "Redis"],
-    metrics: [
-      { label: "Active Users", value: "200K+" },
-      { label: "Uptime", value: "99.9%" },
-    ],
-  },
+// Image paths mapping
+const caseStudiesImages = [
+  "/japanese-ecommerce-website-dashboard-with-products.jpg",
+  "/modern-finance-app-mobile-interface-with-charts.jpg",
+  "/online-learning-platform-with-video-courses.jpg",
 ]
 
 export function CaseStudiesSection() {
+  const { t } = useLanguage()
+  const caseStudies = (t("caseStudies.items") as any[]) || []
   const sectionRef = useRef<HTMLElement>(null)
   const headingRef = useRef<HTMLDivElement>(null)
   const cardsContainerRef = useRef<HTMLDivElement>(null)
@@ -123,16 +97,16 @@ export function CaseStudiesSection() {
         >
           <div className="max-w-2xl">
             <h2 className="font-sans text-4xl sm:text-5xl font-bold text-white tracking-tight">
-              Selected Work
+              {t("caseStudies.heading")}
             </h2>
             <p className="mt-6 text-lg text-cool-fog/80 leading-relaxed font-light">
-              Real projects, real results. We build digital products that scale.
+              {t("caseStudies.subheading")}
             </p>
           </div>
           
           <Button variant="outline" className="hidden md:flex rounded-full border-white/20 bg-white/5 text-white hover:bg-white hover:text-orbital-navy transition-all" asChild>
             <Link href="/portfolio">
-              View All Projects <ExternalLink className="ml-2 w-4 h-4" />
+              {t("caseStudies.viewAllButton")} <ExternalLink className="ml-2 w-4 h-4" />
             </Link>
           </Button>
         </div>
@@ -149,7 +123,7 @@ export function CaseStudiesSection() {
               {/* Image Container with Parallax Class */}
               <div className="absolute inset-0 overflow-hidden">
                 <img
-                  src={study.image}
+                  src={caseStudiesImages[index] || ""}
                   alt={study.title}
                   // Scale up slightly to allow for parallax movement without showing edges
                   className="project-image w-full h-[120%] object-cover transition-transform duration-700 ease-out group-hover:scale-110 opacity-60 group-hover:opacity-40"
@@ -184,7 +158,7 @@ export function CaseStudiesSection() {
                   {/* Hidden Details that slide up on hover */}
                   <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                     {/* Metrics */}
-                    {study.metrics.map((metric, i) => (
+                    {study.metrics.map((metric: any, i: number) => (
                        <div key={i}>
                           <div className="text-xl font-bold text-white">{metric.value}</div>
                           <div className="text-xs text-cool-fog uppercase tracking-wider">{metric.label}</div>
@@ -194,7 +168,7 @@ export function CaseStudiesSection() {
 
                   {/* Tech Stack (Visible always, pushes up on hover) */}
                   <div className="flex flex-wrap gap-2 mt-6 absolute bottom-8 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                     {study.tech.map((t, i) => (
+                     {study.tech.map((t: string, i: number) => (
                         <span key={i} className="text-xs text-cool-fog/60 font-mono">
                            #{t}
                         </span>
@@ -211,7 +185,7 @@ export function CaseStudiesSection() {
         <div className="mt-12 flex md:hidden justify-center">
              <Button variant="outline" className="rounded-full border-white/20 bg-white/5 text-white" asChild>
             <Link href="/portfolio">
-              View All Projects
+              {t("caseStudies.viewAllButton")}
             </Link>
           </Button>
         </div>
