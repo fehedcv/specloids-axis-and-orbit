@@ -171,6 +171,9 @@ export function Footer() {
           <div className="text-slate-500 text-sm">
             © {new Date().getFullYear()} Axis & Orbit. All rights reserved.
           </div>
+          <p className="text-slate-300 text-sm">
+            Legal business name: AXIS AND ORBIT
+          </p>
         </div>
       </div>
     </footer>
